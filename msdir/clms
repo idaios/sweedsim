@@ -1,0 +1,2 @@
+gcc -g  -o ms  ms.c  rand1.c streec.c kde.c -lgsl -lgslcblas -lm 
+

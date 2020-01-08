@@ -1,0 +1,61 @@
+
+# Makefile for the sequential version
+
+CC = gcc
+
+CFLAGS = -Wall  -g -O3
+
+LIBRARIES = -lgsl -lgslcblas -lm 
+
+EXECNAME = SweeD
+
+MSSEL = ../mssel/
+MSDIR = ../msdir/
+
+OBJS = SweeD.o SweeD_Input.o SweeD_Kernel.o SweeD_SFS.o SweeD_CLR.o SweeD_BFGS.o  $(MSDIR)ms.o $(MSDIR)streec.o $(MSDIR)kde.o $(MSDIR)/rand1.o $(MSSEL)/mssel.o $(MSSEL)/mssel_streecsel.o $(MSSEL)/mssel_rand1.o
+
+all: $(EXECNAME)
+     
+SweeD:	$(OBJS)
+	$(CC) $(CFLAGS) -o $(EXECNAME) $(OBJS) $(LIBRARIES)
+
+rand1.o:      ../msdir/rand1.c
+	      $(CC) $(CFLAGS) -c ../msdir/rand1.c
+
+kde.o:	      ../msdir/kde.c
+	      $(CC) $(CFLAGS) -c ../msdir/kde.c
+
+
+
+mssel_streecsel.o:      $(MSSEL)/mssel_streecsel.c
+	       $(CC) $(CFLAGS) -c $(MSSEL)/mssel_streecsel.c -o $(MSSEL)/mssel_streecsel.o
+
+
+streec.o:      ../msdir/streec.c
+	       $(CC) $(CFLAGS) -c ../msdir/streec.c
+	       
+
+ms.o:	../msdir/ms.c
+	$(CC) $(CFLAGS) -c ../msdir/ms.c ../msdir/rand1.c ../msdir/streec.c ../msdir/kde.c 
+
+SweeD.o: SweeD.c
+	 $(CC) $(CFLAGS) -c SweeD.c
+
+SweeD_Input.o: SweeD_Input.c 
+	       $(CC) $(CFLAGS) -c SweeD_Input.c
+
+SweeD_Kernel.o: SweeD_Kernel.c 
+		$(CC) $(CFLAGS) -c SweeD_Kernel.c
+
+SweeD_SFS.o: SweeD_SFS.c 
+	$(CC) $(CFLAGS) -c SweeD_SFS.c
+
+SweeD_CLR.o: SweeD_CLR.c 
+	$(CC) $(CFLAGS) -c SweeD_CLR.c
+
+SweeD_BFGS.o: SweeD_BFGS.c 
+	$(CC) $(CFLAGS) -c SweeD_BFGS.c
+
+clean:
+	rm $(EXECNAME)
+	rm $(OBJS)
