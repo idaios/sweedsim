@@ -1,5 +1,6 @@
 # A lot of data
 RES_*
+trajectory_RES_*
 
 # Prerequisites
 *.d
