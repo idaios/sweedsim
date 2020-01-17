@@ -1,4 +1,5 @@
-name="continent_island_twoway_bottleneck4"
+prefix="RES_"
+name="${prefix}continent_island_twoway_bottleneck4"
 basedir=`pwd`
 demographyOptions=" -en 0.01 1 0.05 -en 0.05 1 1 -en 0.01 2 0.05 -en 0.05 2 1 -ej 3 2 1 "
 sweedfolder="../sweed/"
